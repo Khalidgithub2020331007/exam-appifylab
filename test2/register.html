@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="register.css"> -->
+</head>
+<body>
+    <div style="text-align: center;">
+
+    <h1>Register Page</h1>
+    <form action="" method="">
+        <label for="username"style="margin-top: 10px;">Username:</label>
+        <input type="text" id="username" name="username" style="margin-top: 10px;"required placeholder="Input your username">
+        <br>
+        <p id="name_correction" style="color: red;"></p>
+
+
+        <label for="email"style="margin-top: 10px;">Email:</label>
+        <input type="email" id="email"style="margin-top: 10px;" name="email" required placeholder="Input your email">
+        <br>
+        <p id="email_correction" style="color: red;"></p>
+
+        <label for="password"style="margin-top: 10px;">Password:</label>
+        <input type="password" id="password" style="margin-top: 10px;" placeholder="Input Your Password" name="password" required>
+        <br>
+        <p id="password_correction" style="color:red"></p>
+
+        <button type="button" id="registration_button" style="margin-top: 10px;">Register</button>
+       
+         
+
+    </form>
+    <p class="font-size: 10px ">You have an account? 
+                <br>
+                <a href="/">Login Now</a></p>
+    </div>
+    <script> var exports = {}; </script>
+<script src="ts-playground/dist/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+.outer {
+  display: grid;
+  grid-template-columns: repeat(4,25%);
+  /* background-color: rgb(125, 172, 219); */
+  padding: 10px;
+  border: 0cqhs solid black;
+  grid-row-start: auto;
+  gap: 10px;
+  /* height: 100%; */
+  width: 100%;
+}
+
+.add_task_div{
+
+  position: fixed;
+  text-align: center;
+  bottom: 10px;
+  
+  width:100%;
+  height: 180px;
+  background-color: lightgrey;
+  border: 2px solid black;
+}

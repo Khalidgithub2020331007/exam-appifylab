@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kandon Table</title>
+    <link rel="stylesheet" href="/CSS/kandon.css">
+</head>
+<body>
+    <div style="text-align: center;"><H1>Team Progress Table</H1></div>
+    <div class="outer" style="text-align: center;">
+        
+        <div class="TODO"style="background-color: #FF7F50;height: 100vh;">
+            <H2>Todo</H2>
+                <p>this is khalid's list
+
+                </p>
+            
+        </div>
+        <div class="In Progress"style="background-color: #FF8C00;height: 100vh;">
+            <h2 >In Progress</h2>
+        </div>
+        <div class="Testing" style="background-color: #ADFF2F;height: 100vh;">
+            <h2 >Testing</h2>
+        </div>
+        <div class="Finished" style="background-color: #87CEFA;height:100vh;">
+
+
+            <h2 >Finished</h2>
+        </div>
+    </div>
+    <div class="add_task_div" >
+        <input type="text" id="title" style="width:auto;" name="title" placeholder="Title*" required>
+        <br>
+        <input type="description" id="description" name="description" placeholder="Description">
+        <br>
+        <input type="email" id="assigned_user" name="assigne_user" placeholder="Assigned User Email*">
+        <p id="email_correction" style="color: red;"></p>
+        <br>
+        <input type="text" name="created_by" id="created_by" placeholder="Created By*" hidden>
+        <button id="add_task" style="text-align: center;">Add Task</button>
+    </div>
+    <script> var exports = {}; </script>
+<script src="ts-playground/dist/kandon.js"></script>
+</body>
+</html>
