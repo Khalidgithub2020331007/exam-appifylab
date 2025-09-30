@@ -19,22 +19,35 @@ function loadTasks() {
     inprogress.innerHTML = '';
     testing.innerHTML = '';
     finished.innerHTML = '';
+    let i=0
     existTasks.forEach((task: { title: string; description: string; assigned_user: string; created_by: string; status: string; }) => {
         const li = document.createElement('li');
-        li.innerHTML = `<div class='test'><strong>Title:</strong> ${task.title} <br> <strong>Description:</strong> ${task.description} <br> <strong>Assigned User:</strong> ${task.assigned_user} <br> <strong>Created By:</strong> ${task.created_by} <br> <strong>Status:</strong> ${task.status} <br><button id="move">Move</button><br></div>`;
+        li.innerHTML = `<div class='test'>
+                                <b>Title:</b> ${task.title} <br>
+                                <b>Description:</b> ${task.description} <br> 
+                                <b>Assigned User:</b> ${task.assigned_user} <br> 
+                                <b>Created By:</b> ${task.created_by} <br> 
+                                <b>Status:</b> ${task.status} <br>
+                                <span> <button id="moveleft${i}">Move Left</button>
+
+                                <button id="moveright${i}">Move Right</button><br>
+                                </span>
+                                <button id="delete${i}" style="background-color: red;">Delete</button><br>
+                                <hr>
+                                </div> `;
         if (task.status === 'todo') {
-            todo.appendChild(li);
+            todo.appendChild(li)
         } else if (task.status === 'in-progress') {
-            inprogress.appendChild(li);
+            inprogress.appendChild(li)
         } else if (task.status === 'testing') {
-            testing.appendChild(li);
+            testing.appendChild(li)
         } else if (task.status === 'finished') {
-            finished.appendChild(li);
+            finished.appendChild(li)
         }
+        i+=1;
     });
 }
-
-window.onload = loadTasks;    
+loadTasks();   
 
 
 
@@ -110,4 +123,70 @@ add_task_btn?.addEventListener('click', (e: MouseEvent) => {
     // alert("Registration Successful");
     // window.location.href = '/kandon.html';
   
+});
+function movetask(index: number) {
+    const existtasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
+
+
+    const task = existtasks[index];
+    if (task.status === 'todo') {
+        task.status = 'in-progress';
+    } else if (task.status === 'in-progress') {
+        task.status = 'testing';
+    } else if (task.status === 'testing') {
+        task.status = 'finished';
+    } else if (task.status === 'finished') {
+        alert('Task is already in the finished state.');
+        return;
+    }
+
+    existtasks[index] = task;
+    localStorage.setItem('todoTasks', JSON.stringify(existtasks));
+    loadTasks();
+}
+function deletetask(ind:number){
+    const existtasks=JSON.parse(localStorage.getItem('todoTasks') || '[]');
+    const task=existtasks[ind];
+    existtasks.splice(ind,1);
+    localStorage.setItem('todoTasks',JSON.stringify(existtasks));
+    loadTasks();
+
+}
+function movetaskleft(ind:number){
+    const existtasks=JSON.parse(localStorage.getItem('todoTasks')||'[]')
+    const task=existtasks[ind];
+
+    
+    if (task.status === 'in-progress') {
+        task.status = 'todo';
+    } else if (task.status === 'testing') {
+        task.status = 'in-progress';
+    } else if (task.status === 'finished') {
+        task.status='testing'
+    }
+     else if (task.status === 'todo') {
+        alert('Task is already in the todo state.');
+        return;
+    }
+    existtasks[ind]=task;
+    localStorage.setItem('todoTasks',JSON.stringify(existtasks))
+    loadTasks();  
+
+
+}
+document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target && target.id.startsWith('moveright')) {
+        const ind = parseInt(target.id.replace('moveright', ''), 10);
+        movetask(ind);
+    }
+    if (target && target.id.startsWith('moveleft'))
+    {
+        const ind=parseInt(target.id.replace('moveleft', ''),10);
+        movetaskleft(ind)
+    }
+    if (target&& target.id.startsWith('delete')){
+        const ind=parseInt(target.id.replace('delete',''),10);
+        deletetask(ind);
+    }
 });
