@@ -113,3 +113,8 @@ btn?.addEventListener('click', (e: MouseEvent) => {
     window.location.href = '/kandon.html';
   
 });
+
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}

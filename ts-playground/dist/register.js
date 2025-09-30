@@ -101,4 +101,8 @@ btn?.addEventListener('click', (e) => {
     alert("Registration Successful");
     window.location.href = '/kandon.html';
 });
+function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+}
 //# sourceMappingURL=register.js.map

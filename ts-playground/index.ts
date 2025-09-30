@@ -48,3 +48,7 @@ if (login_btn) {
         alert('No User');
     });
 }
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
