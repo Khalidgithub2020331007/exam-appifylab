@@ -10,7 +10,30 @@ const add_task_btn = document.getElementById("add_task") as HTMLButtonElement,
     todo=document.getElementById("todo") as HTMLUListElement,
     inprogress=document.getElementById("in-progress") as HTMLUListElement,
     testing=document.getElementById("testing") as HTMLUListElement,
-    finished=document.getElementById("finished") as HTMLUListElement;
+    finished=document.getElementById("finished") as HTMLUListElement,
+    logout_btn=document.getElementById('logout_btn') as HTMLButtonElement,
+    currentUser = JSON.parse(localStorage.getItem('currentuser') || 'null');
+(function() {
+    // IIFE code block
+    if( currentUser===null){
+    alert('Please Login')
+
+        window.location.href = 'index.html';
+        return
+    }
+})();
+
+
+logout_btn.addEventListener('click',(e)=>
+{
+    e.preventDefault()
+    console.log('clicked logout')
+    localStorage.setItem('currentuser','');
+    window.location.href = 'index.html';
+
+
+
+})
     
 function loadTasks() {  
     const existTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
@@ -90,7 +113,6 @@ add_task_btn?.addEventListener('click', (e: MouseEvent) => {
    
 
    const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-   const currentUser = JSON.parse(localStorage.getItem('currentuser') || 'null');
    const existTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
     console.log("todo Tasks",existTasks);
    console.log(currentUser.email,existingUsers,existTasks)
@@ -136,13 +158,17 @@ function movetask(index: number) {
     } else if (task.status === 'testing') {
         task.status = 'finished';
     } else if (task.status === 'finished') {
-        alert('Task is already in the finished state.');
+        alert('No space in right');
         return;
     }
 
     existtasks[index] = task;
     localStorage.setItem('todoTasks', JSON.stringify(existtasks));
     loadTasks();
+}
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
 }
 function deletetask(ind:number){
     const existtasks=JSON.parse(localStorage.getItem('todoTasks') || '[]');
@@ -165,7 +191,7 @@ function movetaskleft(ind:number){
         task.status='testing'
     }
      else if (task.status === 'todo') {
-        alert('Task is already in the todo state.');
+        alert('no space in left');
         return;
     }
     existtasks[ind]=task;

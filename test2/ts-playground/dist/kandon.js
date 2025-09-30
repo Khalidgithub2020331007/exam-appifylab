@@ -1,7 +1,21 @@
 "use strict";
 // alert('JavaScript file is linked to kandon.html');
 Object.defineProperty(exports, "__esModule", { value: true });
-const add_task_btn = document.getElementById("add_task"), title_input = document.getElementById("title"), description_input = document.getElementById("description"), assigned_user_input = document.getElementById("assigned_user"), created_by_input = document.getElementById("created_by"), email_correction = document.getElementById("email_correction"), status_input = document.getElementById("status"), todo = document.getElementById("todo"), inprogress = document.getElementById("in-progress"), testing = document.getElementById("testing"), finished = document.getElementById("finished");
+const add_task_btn = document.getElementById("add_task"), title_input = document.getElementById("title"), description_input = document.getElementById("description"), assigned_user_input = document.getElementById("assigned_user"), created_by_input = document.getElementById("created_by"), email_correction = document.getElementById("email_correction"), status_input = document.getElementById("status"), todo = document.getElementById("todo"), inprogress = document.getElementById("in-progress"), testing = document.getElementById("testing"), finished = document.getElementById("finished"), logout_btn = document.getElementById('logout_btn'), currentUser = JSON.parse(localStorage.getItem('currentuser') || 'null');
+(function () {
+    // IIFE code block
+    if (currentUser === null) {
+        alert('Please Login');
+        window.location.href = 'index.html';
+        return;
+    }
+})();
+logout_btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('clicked logout');
+    localStorage.setItem('currentuser', '');
+    window.location.href = 'index.html';
+});
 function loadTasks() {
     const existTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
     console.log("Loading tasks", existTasks);
@@ -70,7 +84,6 @@ add_task_btn?.addEventListener('click', (e) => {
         return;
     }
     const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    const currentUser = JSON.parse(localStorage.getItem('currentuser') || 'null');
     const existTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
     console.log("todo Tasks", existTasks);
     console.log(currentUser.email, existingUsers, existTasks);
@@ -111,12 +124,16 @@ function movetask(index) {
         task.status = 'finished';
     }
     else if (task.status === 'finished') {
-        alert('Task is already in the finished state.');
+        alert('No space in right');
         return;
     }
     existtasks[index] = task;
     localStorage.setItem('todoTasks', JSON.stringify(existtasks));
     loadTasks();
+}
+function myFunction() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
 }
 function deletetask(ind) {
     const existtasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
@@ -138,7 +155,7 @@ function movetaskleft(ind) {
         task.status = 'testing';
     }
     else if (task.status === 'todo') {
-        alert('Task is already in the todo state.');
+        alert('no space in left');
         return;
     }
     existtasks[ind] = task;
