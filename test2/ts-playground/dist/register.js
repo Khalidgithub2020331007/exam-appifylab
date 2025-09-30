@@ -1,6 +1,6 @@
 "use strict";
+// alert("JavaScript file is linked!");
 Object.defineProperty(exports, "__esModule", { value: true });
-alert("JavaScript file is linked!");
 const btn = document.getElementById("registration_button");
 const input_name = document.getElementById("username");
 const input_email = document.getElementById("email");

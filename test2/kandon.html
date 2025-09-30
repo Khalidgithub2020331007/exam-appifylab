@@ -12,33 +12,40 @@
         
         <div class="TODO"style="background-color: #FF7F50;height: 100vh;">
             <H2>Todo</H2>
-                <p>this is khalid's list
-
-                </p>
+            <ul id="todo"></ul>
             
         </div>
-        <div class="In Progress"style="background-color: #FF8C00;height: 100vh;">
+        <div class="InProgress"style="background-color: #FF8C00;height: 100vh;">
             <h2 >In Progress</h2>
+            <ul id="in-progress"></ul>
         </div>
         <div class="Testing" style="background-color: #ADFF2F;height: 100vh;">
             <h2 >Testing</h2>
+            <ul id="testing"></ul>
         </div>
         <div class="Finished" style="background-color: #87CEFA;height:100vh;">
-
-
             <h2 >Finished</h2>
+            <ul id="finished"></ul>
         </div>
     </div>
-    <div class="add_task_div" >
+    <div class="add_task_div" style="background-color: bisque;" >
         <input type="text" id="title" style="width:auto;" name="title" placeholder="Title*" required>
         <br>
         <input type="description" id="description" name="description" placeholder="Description">
         <br>
         <input type="email" id="assigned_user" name="assigne_user" placeholder="Assigned User Email*">
         <p id="email_correction" style="color: red;"></p>
+        <select name="status" id="status" aria-placeholder="Status*">
+            <option value="todo">Todo</option>
+            <option value="in-progress">In-Progress</option>
+            <option value="testing">Testing</option>
+            <option value="finished">Finished</option>
+        </select>
         <br>
-        <input type="text" name="created_by" id="created_by" placeholder="Created By*" hidden>
         <button id="add_task" style="text-align: center;">Add Task</button>
+        <br>
+                <input type="text" name="created_by" id="created_by" placeholder="Created By*" hidden>
+        <br>
     </div>
     <script> var exports = {}; </script>
 <script src="ts-playground/dist/kandon.js"></script>

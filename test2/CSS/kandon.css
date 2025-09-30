@@ -1,7 +1,7 @@
 .outer {
   display: grid;
   grid-template-columns: repeat(4,25%);
-  /* background-color: rgb(125, 172, 219); */
+
   padding: 10px;
   border: 0cqhs solid black;
   grid-row-start: auto;
@@ -9,6 +9,22 @@
   /* height: 100%; */
   width: 100%;
 }
+ul{
+  box-shadow: 40px 30px 20px 10px rgba(31, 27, 27, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  background-color: white;
+ /* 5px rounded corners */
+}
+.test{
+  margin-bottom: 100px;
+  gap: 10px;
+  border-radius: 5px;
+  border-color: black;
+}
+
 
 .add_task_div{
 
@@ -17,7 +33,7 @@
   bottom: 10px;
   
   width:100%;
-  height: 180px;
+  height: 250px;
   background-color: lightgrey;
   border: 2px solid black;
 }

@@ -1,4 +1,4 @@
-alert("JavaScript file is linked!");
+// alert("JavaScript file is linked!");
 
 const btn= document.getElementById("registration_button") as HTMLElement;
 const input_name= document.getElementById("username") as HTMLInputElement;

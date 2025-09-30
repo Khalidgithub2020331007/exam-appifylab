@@ -1,4 +1,4 @@
-alert("JavaScript file is linked!");
+// alert("JavaScript file is linked!");
 const login_btn  = document.getElementById('login_button') as HTMLElement;
 const inputemail  = document.getElementById('email') as HTMLInputElement;
 const inputpassword  = document.getElementById('password') as HTMLInputElement;

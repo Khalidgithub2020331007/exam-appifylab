@@ -1,7 +1,32 @@
 "use strict";
+// alert('JavaScript file is linked to kandon.html');
 Object.defineProperty(exports, "__esModule", { value: true });
-alert('JavaScript file is linked to kandon.html');
-const add_task_btn = document.getElementById("add_task"), title_input = document.getElementById("title"), description_input = document.getElementById("description"), assigned_user_input = document.getElementById("assigned_user"), created_by_input = document.getElementById("created_by"), email_correction = document.getElementById("email_correction");
+const add_task_btn = document.getElementById("add_task"), title_input = document.getElementById("title"), description_input = document.getElementById("description"), assigned_user_input = document.getElementById("assigned_user"), created_by_input = document.getElementById("created_by"), email_correction = document.getElementById("email_correction"), status_input = document.getElementById("status"), todo = document.getElementById("todo"), inprogress = document.getElementById("in-progress"), testing = document.getElementById("testing"), finished = document.getElementById("finished");
+function loadTasks() {
+    const existTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
+    console.log("Loading tasks", existTasks);
+    todo.innerHTML = '';
+    inprogress.innerHTML = '';
+    testing.innerHTML = '';
+    finished.innerHTML = '';
+    existTasks.forEach((task) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<div class='test'><strong>Title:</strong> ${task.title} <br> <strong>Description:</strong> ${task.description} <br> <strong>Assigned User:</strong> ${task.assigned_user} <br> <strong>Created By:</strong> ${task.created_by} <br> <strong>Status:</strong> ${task.status} <br><button id="move">Move</button><br></div>`;
+        if (task.status === 'todo') {
+            todo.appendChild(li);
+        }
+        else if (task.status === 'in-progress') {
+            inprogress.appendChild(li);
+        }
+        else if (task.status === 'testing') {
+            testing.appendChild(li);
+        }
+        else if (task.status === 'finished') {
+            finished.appendChild(li);
+        }
+    });
+}
+window.onload = loadTasks;
 assigned_user_input?.addEventListener('input', () => {
     console.log('Typing email', assigned_user_input.value);
     if (!assigned_user_input.value.includes("@gmail.com") || assigned_user_input.value.includes(" ")) {
@@ -21,6 +46,7 @@ add_task_btn?.addEventListener('click', (e) => {
     const descriptionvalue = description_input?.value.trim() || '';
     const assigned_user_value = assigned_user_input?.value.trim() || '';
     const created_user_value = created_by_input?.value.trim() || '';
+    const status_value = status_input?.value.trim() || '';
     if (!assigned_user_value.includes("@gmail.com") || assigned_user_value.includes(" ")) {
         alert("Give me correct email");
         return;
@@ -31,26 +57,27 @@ add_task_btn?.addEventListener('click', (e) => {
     }
     const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
     const currentUser = JSON.parse(localStorage.getItem('currentuser') || 'null');
-    const todoTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
-    console.log("todo Tasks", todoTasks);
-    console.log(currentUser.email, existingUsers);
+    const existTasks = JSON.parse(localStorage.getItem('todoTasks') || '[]');
+    console.log("todo Tasks", existTasks);
+    console.log(currentUser.email, existingUsers, existTasks);
     const emailExists = existingUsers.some((user) => user.email === assigned_user_input.value);
     console.log(emailExists);
-    if (emailExists) {
-        todoTasks.push({
-            title: titlevalue,
-            description: descriptionvalue,
-            assigned_user: assigned_user_value,
-            created_by: currentUser.email,
-            status: 'todos',
-        });
-        alert("Task Added Successfully");
-    }
-    else {
+    if (!emailExists) {
         alert("Assigned user email does not exist");
         console.log("Assigned user email does not exist");
         return;
     }
+    existTasks.push({
+        title: titlevalue,
+        description: descriptionvalue,
+        assigned_user: assigned_user_value,
+        created_by: currentUser.email,
+        status: status_value,
+    });
+    localStorage.setItem("todoTasks", JSON.stringify(existTasks));
+    console.log("todo Tasks after push", existTasks);
+    console.log(status_input.value);
+    alert("Task Added Successfully");
     // existingUsers.push({name:namevalue,email:emailvalue,password:passwordvalue})
     // localStorage.setItem("users",JSON.stringify(existingUsers));
     // console.log(existingUsers);
